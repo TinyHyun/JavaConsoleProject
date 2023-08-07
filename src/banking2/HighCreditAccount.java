@@ -17,8 +17,23 @@ public class HighCreditAccount extends Account {
 	@Override
 	public boolean plusAccMoney(int money) {
 		
-		
-		
+		switch (level) {
+		case "A":
+			super.balance = (int)(super.balance + (super.balance * inter) + 
+					(super.balance * 0.07) + money);
+			break;
+			
+		case "B":
+			super.balance = (int)(super.balance + (super.balance * inter) + 
+					(super.balance * 0.04) + money);
+			break;
+			
+		case "C":
+			super.balance = (int)(super.balance + (super.balance * inter) + 
+					(super.balance * 0.02) + money);
+			break;
+		}
+
 		return true;
 	}
 }

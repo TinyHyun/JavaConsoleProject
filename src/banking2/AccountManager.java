@@ -44,7 +44,7 @@ public class AccountManager {
 			acc = new NormalAccount(accountNumber, name, balance, inter);
 			break;
 		case 2:
-			System.out.println("신용등급(A,B,C등급): "); String level = scan.nextLine();
+			System.out.print("신용등급(A,B,C등급): "); String level = scan.nextLine();
 			acc = new HighCreditAccount(accountNumber, name, balance, inter, level);
 			break;
 		}
