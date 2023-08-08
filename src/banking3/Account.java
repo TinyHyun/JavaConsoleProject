@@ -1,12 +1,12 @@
-package banking2;
+package banking3;
 
 import java.util.Scanner;
 
-public class Account {
+public abstract class Account {
 
 	//멤버변수
-	private String accountNumber; //계좌번호
-	private String name; //이름
+	protected String accountNumber; //계좌번호
+	protected String name; //이름
 	protected int balance; //잔액
 
 	
@@ -41,22 +41,10 @@ public class Account {
 	
 	
 	//전체계좌정보출력
-	public void showAccountInfo() {
-		
-		System.out.println();
-		System.out.println("******* 계좌 정보 출력 *******");
-		System.out.println("--------------------------");
-		System.out.println("계좌번호 > " + accountNumber);
-		System.out.println("고객 이름 > " + name);
-		System.out.println("잔고 > " + balance);
-	}
+	public abstract void showAccountInfo();
 	
 	//입급처리
-	public boolean plusAccMoney(int money) {
-		//1단계에서 별도의 검사를 하지않고 입금처리함
-		balance += money;
-		return true;
-	}
+	public abstract boolean plusAccMoney(int money);
 	
 	
 	//출금처리

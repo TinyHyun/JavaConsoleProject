@@ -1,4 +1,4 @@
-package banking2;
+package banking3;
 
 public class HighCreditAccount extends Account {
 
@@ -19,18 +19,18 @@ public class HighCreditAccount extends Account {
 		
 		switch (level) {
 		case "A":
-			super.balance = (int)(super.balance + (super.balance * inter) + 
-					(super.balance * 0.07) + money);
+			balance = (int)(balance + (balance * inter) + 
+					(balance * 0.07) + money);
 			break;
 			
 		case "B":
-			super.balance = (int)(super.balance + (super.balance * inter) + 
-					(super.balance * 0.04) + money);
+			balance = (int)(balance + (balance * inter) + 
+					(balance * 0.04) + money);
 			break;
 			
 		case "C":
-			super.balance = (int)(super.balance + (super.balance * inter) + 
-					(super.balance * 0.02) + money);
+			balance = (int)(balance + (balance * inter) + 
+					(balance * 0.02) + money);
 			break;
 		}
 
@@ -40,7 +40,12 @@ public class HighCreditAccount extends Account {
 	@Override
 	public void showAccountInfo() {
 		
-		super.showAccountInfo();
+		System.out.println();
+		System.out.println("******* 계좌 정보 출력 *******");
+		System.out.println("--------------------------");
+		System.out.println("계좌번호 > " + accountNumber);
+		System.out.println("고객 이름 > " + name);
+		System.out.println("잔고 > " + balance);
 		System.out.println("기본이자 > " + (int)(inter * 100) + "%");
 		System.out.println("신용등급 > " + level);
 		System.out.println("--------------------------");
