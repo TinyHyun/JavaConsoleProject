@@ -48,6 +48,7 @@ public class AccountManager {
 			break;
 		case 2:
 			System.out.print("신용등급(A,B,C등급): "); String level = scan.nextLine();
+			level = level.toUpperCase();
 			acc = new HighCreditAccount(accountNumber, name, balance, inter, level);
 			break;
 		}
@@ -63,11 +64,11 @@ public class AccountManager {
 		
 		System.out.println("계좌번호와 입금할 금액을 입력하세요.");
 		System.out.print("계좌번호: "); String accountNum = scan.nextLine();
+		
 		int money; 
 		
 		while (true) {
 			try {
-				
 				System.out.print("입금액: "); 
 				money = scan.nextInt();
 				scan.nextLine();
@@ -90,7 +91,7 @@ public class AccountManager {
 					break;
 				}
 				
-				String msgError ="다시 입력하세요.";
+				String msgError = "다시 입력하세요.";
 				
 				MenuSelectException ex = new MenuSelectException(msgError);
 				throw ex;
@@ -121,13 +122,65 @@ public class AccountManager {
 		
 		System.out.println("계좌번호와 출금할 금액을 입력하세요.");
 		System.out.print("계좌번호: "); String accountNum = scan.nextLine();
-		System.out.print("출금액: "); int money = scan.nextInt();
-		scan.nextLine();
+		
+		int money;
+		
+		while (true) {
+			try {
+				System.out.print("출금액: "); 
+				money = scan.nextInt();
+				scan.nextLine();
+			}
+			catch (InputMismatchException e) {
+				scan.nextLine();
+				System.out.println("문자는 입력할수 없습니다.");
+				continue;
+			}
+			
+			try {
+				if (money < 0) {
+					System.out.println("음수는 출금할 수 없습니다.");
+				}
+				else if (!(money%1000 == 0)) {
+					System.out.println("출금은 1000원 단위로만 출금 가능합니다.");
+				}
+				else {
+					break;
+				}
+				
+				String msgError = "다시 입력하세요.";
+				
+				MenuSelectException ex = new MenuSelectException(msgError);
+				throw ex;
+			}
+			catch (MenuSelectException e) {
+				
+				System.out.println("[예외발생] " + e.getMessage());
+			}
+		}
+		
 		
 		for (int i=0 ; i<accCount ; i++) {
 			if(accArr[i].getAccountNumber().equals(accountNum)) {
-				accArr[i].minusAccMoney(money);
-				System.out.println("출금이 완료되었습니다.");
+				if(money > accArr[i].getBalance()) {
+					System.out.println("잔고가 부족합니다. 금액전체를 출금할까요?");
+					System.out.print("- YES / NO - ");
+					String yn = scan.nextLine();
+					
+					if(yn.toUpperCase().equals("YES")) {
+						System.out.println("금액 전체를 출금처리합니다.");
+						
+						accArr[i].minusAccMoney(accArr[i].getBalance());
+					}
+					else {
+						System.out.println("출금요청을 취소합니다.");
+					}
+				}
+				else {
+					accArr[i].minusAccMoney(money);
+					System.out.println("출금이 완료되었습니다.");
+
+				}
 				break;
 			}
 		}
