@@ -1,5 +1,11 @@
-package banking4;
+package banking6;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -12,8 +18,13 @@ public class AccountManager {
 	Scanner scan = new Scanner(System.in);
 
 //	private Account[] accArr = new Account[50];
-	Set<Account> accSet = new HashSet<Account>();
-	
+	private Set<Account> accSet = new HashSet<Account>();
+	AutoSaver saver = new AutoSaver("선풍기");
+
+	public Set<Account> getAccSet() {
+		return accSet;
+	}
+
 
 	//메뉴출력
 	public void showMenu() {
@@ -24,7 +35,8 @@ public class AccountManager {
 		System.out.println("3. 출 금");
 		System.out.println("4. 계좌정보출력");
 		System.out.println("5. 계좌정보삭제");
-		System.out.println("6. 프로그램 종료");
+		System.out.println("6. 저장옵션");
+		System.out.println("7. 프로그램 종료");
 		System.out.print("선택: ");
 	}
 	
@@ -56,7 +68,6 @@ public class AccountManager {
 			break;
 		}
 		boolean flag = accSet.add(acc);
-		
 		if (flag) {
 			
 			System.out.println("계좌계설이 완료되었습니다.");
@@ -282,6 +293,122 @@ public class AccountManager {
 			}
 		}
 		System.out.println("계좌를 찾지못했습니다.");
+	}
+	
+	
+	//저장
+	public void objOutputStream() {
 		
+		try {
+			ObjectOutputStream out = 
+				new ObjectOutputStream(new FileOutputStream("src/banking6/AccountInfo.obj"));
+			
+//			for (Account acc : accSet) {
+//				out.writeObject(acc);
+//			}
+			
+			out.writeObject(accSet);
+			
+			out.close();
+			
+			System.out.println("저장에 성공하였습니다.");
+		}
+
+		catch (FileNotFoundException e) {
+			System.out.println("파일이 없습니다.");
+		}
+		catch (IOException e) {
+			System.out.println("뭔가 없습니다.");
+		}
+	}
+	
+	//불러오기
+	public void objInputStream() {
+		
+		System.out.println("저장된 계좌정보를 불러옵니다.");
+		
+		try {
+			ObjectInputStream in = 
+				new ObjectInputStream(new FileInputStream("src/banking6/AccountInfo.obj"));
+			
+			accSet = (Set<Account>)in.readObject();
+			
+			in.close();
+			
+			System.out.printf("%d개의 정보를 불러왔습니다.\n", accSet.size());
+		}
+		catch (ClassCastException e) {
+			System.out.println("한서가 알빠아니래요.");
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("객체를 찾을 수 없습니다.");
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("파일이 없습니다.");
+		}
+		catch (IOException e) {
+			System.out.println("뭔가 없습니다.");
+		}
+	}
+
+	
+	//자동저장
+	public void autoSave() {
+		
+		System.out.println("자동저장을 하시겠습니끼?");
+		System.out.print("--ON / OFF--");
+		String saveChoice = scan.nextLine();
+		saveChoice = saveChoice.toUpperCase();
+		
+		switch (saveChoice) {
+		case "ON":
+			try {
+				System.out.println("자동저장을 실행합니다.");
+				
+				saver.setName("오토세이버");
+				saver.setDaemon(true);
+				saver.start();
+			}
+			catch (IllegalThreadStateException e) {
+				System.out.println("이미 자동저장이 실행되고있습니다.");
+			}
+			break;
+			
+		case "OFF":
+			System.out.println("자동저장을 멈춤니다.");
+			saver.interrupt();
+			break;
+		}
+
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,9 +1,10 @@
-package banking4;
+package banking6;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Scanner;
 
-public abstract class Account {
+public abstract class Account implements Serializable {
 
 	//멤버변수
 	protected String accountNumber; //계좌번호

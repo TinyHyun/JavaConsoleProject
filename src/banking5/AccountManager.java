@@ -1,5 +1,11 @@
-package banking4;
+package banking5;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -56,7 +62,6 @@ public class AccountManager {
 			break;
 		}
 		boolean flag = accSet.add(acc);
-		
 		if (flag) {
 			
 			System.out.println("계좌계설이 완료되었습니다.");
@@ -282,6 +287,91 @@ public class AccountManager {
 			}
 		}
 		System.out.println("계좌를 찾지못했습니다.");
+	}
+	
+	
+	//저장
+	public void objOutputStream() {
 		
+		try {
+			ObjectOutputStream out = 
+				new ObjectOutputStream(new FileOutputStream("src/banking5/AccountInfo.obj"));
+			
+//			for (Account acc : accSet) {
+//				out.writeObject(acc);
+//			}
+			
+			out.writeObject(accSet);
+			
+			out.close();
+			
+			System.out.println("저장에 성공하였습니다.");
+		}
+
+		catch (FileNotFoundException e) {
+			System.out.println("파일이 없습니다.");
+		}
+		catch (IOException e) {
+			System.out.println("뭔가 없습니다.");
+		}
+	}
+	
+	//불러오기
+	public void objInputStream() {
+		
+		System.out.println("저장된 계좌정보를 불러옵니다.");
+		
+		try {
+			ObjectInputStream in = 
+				new ObjectInputStream(new FileInputStream("src/banking5/AccountInfo.obj"));
+			
+			accSet = (Set<Account>)in.readObject();
+			
+			in.close();
+			
+			System.out.printf("%d개의 정보를 불러왔습니다.\n", accSet.size());
+		}
+		catch (ClassCastException e) {
+			System.out.println("한서가 알빠아니래요.");
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("객체를 찾을 수 없습니다.");
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("파일이 없습니다.");
+		}
+		catch (IOException e) {
+			System.out.println("뭔가 없습니다.");
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

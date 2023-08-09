@@ -1,4 +1,4 @@
-package banking4;
+package banking6;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,6 +10,8 @@ public class BankingSystemMain implements ICustomDefine {
 		Scanner scan = new Scanner(System.in);
 		
 		AccountManager accMan = new AccountManager();
+		
+		accMan.objInputStream(); //전체 정보 불러오기
 		
 		while (true) {
 			//1.메뉴 출력
@@ -49,12 +51,15 @@ public class BankingSystemMain implements ICustomDefine {
 			case REMOVE:
 				accMan.removeAccount();
 				break;
+			case AutoSave:
+				accMan.autoSave();
+				break;
 			case EXIT:
+				accMan.objOutputStream(); //전체 정보 저장
 				System.out.println("프로그램 종료");
 				return;
 			default :
 				try {
-					
 					String msgError = "다시 입력하세요";
 					MenuSelectException ex = new MenuSelectException(msgError);
 					throw ex;
