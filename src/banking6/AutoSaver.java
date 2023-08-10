@@ -26,7 +26,7 @@ public class AutoSaver extends Thread {
 				
 				for (Account acc : setAcc) {
 					
-					out.printf(acc.printInfo());
+					out.printf(acc.toString());
 					
 				}
 				

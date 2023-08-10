@@ -73,6 +73,7 @@ public abstract class Account implements Serializable {
 	}
 	
 	abstract public String printInfo(); 
+	
 }
 
 
