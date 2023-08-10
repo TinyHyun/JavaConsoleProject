@@ -40,11 +40,7 @@ public abstract class Account {
 		this.balance += balance;
 	}
 	
-	
-	
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		return accountNumber.hashCode();
@@ -61,6 +57,8 @@ public abstract class Account {
 		}
 	}
 
+	
+	
 	//전체계좌정보출력
 	public abstract void showAccountInfo();
 	

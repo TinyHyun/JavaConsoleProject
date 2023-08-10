@@ -59,10 +59,10 @@ public abstract class Account implements Serializable {
 	}
 
 	//전체계좌정보출력
-	public abstract void showAccountInfo();
+	abstract public void showAccountInfo();
 	
 	//입급처리
-	public abstract boolean plusAccMoney(int money);
+	abstract public boolean plusAccMoney(int money);
 	
 	
 	//출금처리
@@ -72,10 +72,7 @@ public abstract class Account implements Serializable {
 		return true;
 	}
 	
-	public String printInfo() {
-		String str = accountNumber + ", " + name + ", " + balance + "\n";
-		return str;
-	}
+	abstract public String printInfo(); 
 }
 
 
