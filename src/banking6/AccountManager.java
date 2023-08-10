@@ -19,7 +19,7 @@ public class AccountManager {
 
 //	private Account[] accArr = new Account[50];
 	private Set<Account> accSet = new HashSet<Account>();
-	AutoSaver saver = new AutoSaver("선풍기");
+	private AutoSaver saver;
 
 	public Set<Account> getAccSet() {
 		return accSet;
@@ -360,10 +360,14 @@ public class AccountManager {
 		String saveChoice = scan.nextLine();
 		saveChoice = saveChoice.toUpperCase();
 		
+		
+		
 		switch (saveChoice) {
 		case "ON":
 			try {
 				System.out.println("자동저장을 실행합니다.");
+				
+				saver = new AutoSaver(this);
 				
 				saver.setName("오토세이버");
 				saver.setDaemon(true);

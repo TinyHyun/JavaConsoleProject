@@ -6,10 +6,12 @@ import java.io.PrintWriter;
 import java.util.Set;
 
 public class AutoSaver extends Thread {
-	public AutoSaver(Object obj) {
-		
-	}
+	private Set<Account> setAcc;
 	
+	public AutoSaver(AccountManager accMan) {
+		setAcc = accMan.getAccSet();
+	}
+
 	@Override
 	public void run() {
 
@@ -22,11 +24,11 @@ public class AutoSaver extends Thread {
 				PrintWriter out = 
 						new PrintWriter(new FileWriter("src/banking6/AutoSaveAccount.txt"));
 				
-//				for (Account acc : accSet) {
-//					
-//					out.printf("%s, %s, %d\n" , acc.accountNumber, acc.name, acc.balance);
-//					
-//				}
+				for (Account acc : setAcc) {
+					
+					out.printf(acc.printInfo());
+					
+				}
 				
 				out.close();
 				System.out.println("txt파일로 저장되었습니다..");
@@ -34,7 +36,6 @@ public class AutoSaver extends Thread {
 			catch (InterruptedException e) {
 				
 				System.out.println();
-				System.out.println("자동저장 실패!!");
 				break;
 			}
 			catch (IOException e) {

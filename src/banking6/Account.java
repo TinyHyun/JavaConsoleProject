@@ -11,10 +11,6 @@ public abstract class Account implements Serializable {
 	protected String name; //이름
 	protected int balance; //잔액
 
-	
-	//메소드 호출을 위한 기본 생성자
-	public Account() {}
-
 	//생성자
 	public Account(String accountNumber, String name, int balance) {
 		
@@ -74,6 +70,11 @@ public abstract class Account implements Serializable {
 		//잔고가 마이너스 처리되더라도 조건없이 출금처리함
 		balance -= money;
 		return true;
+	}
+	
+	public String printInfo() {
+		String str = accountNumber + ", " + name + ", " + balance + "\n";
+		return str;
 	}
 }
 

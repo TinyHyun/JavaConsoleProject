@@ -1,4 +1,4 @@
-package banking1;
+package banking7;
 
 import java.util.Scanner;
 
@@ -83,7 +83,7 @@ public class BankingSystemMain {
 
 	//전체계좌조회
 	public static void showAccInfo() {
-		System.out.println("******* 계좌 정보 출력 *******");
+		System.out.println("**************** 계좌 정보 출력 ****************");
 		System.out.println();
 		System.out.println("------------------------------------------------------");
 		
@@ -115,19 +115,19 @@ public class BankingSystemMain {
 			switch (choice) {
 			case 1:
 				System.out.println();
-				System.out.println("******* 신규 계좌 개설 *******");
+				System.out.println("**************** 신규 계좌 개설 ****************");
 				System.out.println();
 				makeAccount();
 				break;
 			case 2:
 				System.out.println();
-				System.out.println("******* 입 금 *******");
+				System.out.println("**************** 입 금 ****************");
 				System.out.println();
 				depositMoney();
 				break;
 			case 3:
 				System.out.println();
-				System.out.println("******* 출 금 *******");
+				System.out.println("**************** 출 금 ****************");
 				System.out.println();
 				withdrawMoney();
 				break;

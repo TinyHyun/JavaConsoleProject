@@ -50,4 +50,14 @@ public class HighCreditAccount extends Account {
 		System.out.println("신용등급 > " + level);
 		System.out.println("--------------------------");
 	}
+	
+	@Override
+	public String printInfo() {
+
+		String str = 
+				String.format("[신용계좌 %s등급], 계좌번호: %s, 이름: %s, 잔고: %d, 이자율: %d%s\n\n" , level, accountNumber, name, balance, (int)(inter * 100), "%%");
+					
+		return str;
+	}
+	
 }

@@ -34,4 +34,12 @@ public class NormalAccount extends Account {
 		System.out.println("기본이자 > " + (int)(inter * 100) + "%");
 		System.out.println("--------------------------");
 	}
+	
+	@Override
+	public String printInfo() {
+		
+		String str = 
+				String.format("[보통계좌], 계좌번호: %s, 이름: %s, 잔고: %d, 이자율: %d%s\n\n" , accountNumber, name, balance, (int)(inter * 100), "%%");
+		return str;
+	}
 }
