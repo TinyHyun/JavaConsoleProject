@@ -35,11 +35,16 @@ public class NormalAccount extends Account {
 		System.out.println("--------------------------");
 	}
 	
+//	@Override
+//	public String printInfo() {
+//		
+//		String str = 
+//				String.format("[보통계좌], 계좌번호: %s, 이름: %s, 잔고: %d, 이자율: %d%s\n\n" , accountNumber, name, balance, (int)(inter * 100), "%%");
+//		return str;
+//	}
+	
 	@Override
-	public String printInfo() {
-		
-		String str = 
-				String.format("[보통계좌], 계좌번호: %s, 이름: %s, 잔고: %d, 이자율: %d%s\n\n" , accountNumber, name, balance, (int)(inter * 100), "%%");
-		return str;
+	public String toString() {
+		return String.format("[보통계좌] %s, 이자율: %d%s\n", super.toString(), (int)(inter * 100), "%%");
 	}
 }

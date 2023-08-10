@@ -51,13 +51,18 @@ public class HighCreditAccount extends Account {
 		System.out.println("--------------------------");
 	}
 	
+//	@Override
+//	public String printInfo() {
+//
+//		String str = 
+//				String.format("[신용계좌 %s등급], 계좌번호: %s, 이름: %s, 잔고: %d, 이자율: %d%s\n\n" , level, accountNumber, name, balance, (int)(inter * 100), "%%");
+//					
+//		return str;
+//	}
+	
 	@Override
-	public String printInfo() {
-
-		String str = 
-				String.format("[신용계좌 %s등급], 계좌번호: %s, 이름: %s, 잔고: %d, 이자율: %d%s\n\n" , level, accountNumber, name, balance, (int)(inter * 100), "%%");
-					
-		return str;
+	public String toString() {
+		return String.format("[신용계좌 %s등급] %s, 이자율: %d%s\n", level, super.toString(), (int)(inter * 100), "%%");
 	}
 	
 }
