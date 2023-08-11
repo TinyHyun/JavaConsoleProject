@@ -1,15 +1,25 @@
-package banking7.jdbc.prepared;
+package banking7.jdbc;
 
 import java.util.Scanner;
-
-import banking7.jdbc.connect.IConnectImpl;
 
 //DB연결을 위한 클래스를 상속한다.
 public class InsertSQL extends IConnectImpl {
 	
+	private String accountNumber;
+	private String name;
+	private int balance;
+	
+	
+	public InsertSQL(String accountNumber, String name, int balance) {
+		super("education", "1234");
+		this.accountNumber = accountNumber;
+		this.name = name;
+		this.balance = balance;
+	}
+
 	//생성자: 부모클래스의 생성자를 호출하여 연결한다.
 	public InsertSQL() {
-		super(ORACLE_DRIVER, "education", "1234");
+		super("education", "1234");
 	}
 	
 	//쿼리 실행을 위한 멤버메서드
@@ -23,26 +33,6 @@ public class InsertSQL extends IConnectImpl {
 			//2. prepareStatement 객체생성: 준비한 쿼리문을 인수로 전달한다.
 			psmt = con.prepareStatement(query);
 			
-			//3. 사용자로부터 insert할 내용을 입력받는다.
-			Scanner scan = new Scanner(System.in);
-			System.out.print("계좌번호: ");
-			String accountNumber = scan.nextLine();
-			
-			System.out.print("이름: ");
-			String name = scan.nextLine();
-			
-			System.out.print("잔고: ");
-			int balance = scan.nextInt();
-			scan.nextLine();
-			
-			/*
-			4. 인파라미터설정: ?의 순서대로 설정하고 인덱스는 1부터 시작하면 된다.
-				자료형이
-					숫자면 setInt()
-					문자면 setString()
-					날짜면 setDate()
-				입력값이 문자 혹은 날짜면 ''이 자동으로 추가된다.
-			*/
 			psmt.setString(1, accountNumber);
 			psmt.setString(2, name);
 			psmt.setInt(3, balance);
@@ -61,8 +51,8 @@ public class InsertSQL extends IConnectImpl {
 //			psmt.setDate(4, sqlDate);
 			
 			//5. 쿼리실행 및 결과값 반환
-			int affected = psmt.executeUpdate();
-			System.out.println(affected + "행이 입력되었습니다.");
+			psmt.executeUpdate();
+			System.out.println(" 계좌가 개설되었습니다.");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -70,11 +60,6 @@ public class InsertSQL extends IConnectImpl {
 		finally {
 			close();
 		}
-	}
-	
-	public static void main(String[] args) {
-
-		new InsertSQL().execute();
 	}
 
 }

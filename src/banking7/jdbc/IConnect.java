@@ -1,4 +1,4 @@
-package banking7.jdbc.connect;
+package banking7.jdbc;
 
 /*
 인터페이스에 선언되는 

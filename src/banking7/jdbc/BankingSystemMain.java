@@ -23,7 +23,7 @@ public class BankingSystemMain {
 		System.out.println();
 		System.out.println(" ------------------------------------------------------------------------ ");
 		System.out.println();
-		System.out.print("선택: ");
+		System.out.print(" 선택: ");
 		
 	}
 	
@@ -31,75 +31,84 @@ public class BankingSystemMain {
 	//계좌개설을 위한 함수
 	public static void makeAccount() {
 
-		String accountNumber, name;
-		int balance;
+		System.out.print(" 계좌번호: "); String accountNumber = scan.nextLine();
+		System.out.print(" 고객 이름: "); String name = scan.nextLine();
+		System.out.print(" 잔고: "); int balance = scan.nextInt();
 		
-		System.out.print("계좌번호: "); accountNumber = scan.nextLine();
-		System.out.print("고객 이름: "); name = scan.nextLine();
-		System.out.print("잔고: "); balance = scan.nextInt();
-		System.out.println();
-		System.out.println("계좌계설이 완료되었습니다.");
+		InsertSQL insert = new InsertSQL(accountNumber, name, balance);
+		insert.execute();
+//		System.out.println();
+//		System.out.println("계좌계설이 완료되었습니다.");
 		
-		Account acc = new Account(accountNumber, name, balance);
-		accArr[accCount++] = acc;
 	}
 	
 	
 	//입금
 	public static void depositMoney() {
 		
-		System.out.println("계좌번호와 입금할 금액을 입력하세요.");
+		
+		System.out.println(" 계좌번호와 입금할 금액을 입력하세요.");
 		System.out.println();
-		System.out.print("계좌번호: "); String accountNum = scan.nextLine();
-		System.out.print("입금액: "); int money = scan.nextInt();
+		System.out.print(" 계좌번호: "); String accountNumber = scan.nextLine();
 		
-		for (int i=0 ; i<accCount ; i++) {
-			if(accArr[i].getAccountNumber().equals(accountNum)) {
-				accArr[i].plusAccMoney(money);
-				System.out.println();
-				System.out.println("입금이 완료되었습니다.");
-				break;
-			}
-		}
+		SelectSQL select = new SelectSQL(accountNumber);
+		select.execute();
 		
+		int balance = select.getBalance(); 
+		
+		System.out.print(" 입금액: "); int money = scan.nextInt();
+		UpdateSQL update = new UpdateSQL(accountNumber, balance, money);
+		update.execute();
+		
+		
+		System.out.printf(" %d원이 입금되었습니다.\n", money);
+		
+		
+//		System.out.println(" 입금이 완료되었습니다.");
 	}
 	
 	
 	//출금
 	public static void withdrawMoney() {
 		
-		System.out.println("계좌번호와 출금할 금액을 입력하세요.");
+		System.out.println(" 계좌번호와 출금할 금액을 입력하세요.");
 		System.out.println();
-		System.out.print("계좌번호: "); String accountNum = scan.nextLine();
-		System.out.print("출금액: "); int money = scan.nextInt();
+		System.out.print(" 계좌번호: "); String accountNumber = scan.nextLine();
 		
-		for(int i=0 ; i<accCount ; i++) {
-			if(accArr[i].getAccountNumber().equals(accountNum)) {
-				accArr[i].minusAccMoney(money);
-				System.out.println();
-				System.out.println("출금이 완료되었습니다.");
-				break;
-			}
-		}
+		SelectSQL select = new SelectSQL(accountNumber);
+		select.execute();
+		
+		int balance = select.getBalance(); 
+		
+		System.out.print(" 출금액: "); int money = scan.nextInt();
+		UpdateSQL update = new UpdateSQL(accountNumber, balance, -money);
+		update.execute();
+		
+		
+		System.out.printf(" %d원이 출금되었습니다.\n", money);
+		
+		
+		
+		
+		
 	}
 
 	//전체계좌조회
 	public static void showAccInfo() {
-		System.out.println("**************** 계좌 정보 출력 ****************");
+		System.out.println(" ****************************** 계좌 정보 출력 ****************************** ");
 		System.out.println();
-		System.out.println("----------------------------------------------");
+		System.out.println(" ------------------------------------------------------------------------ ");
 		
-		for(int i=0 ; i<accCount ; i++) {
-			accArr[i].showAccountInfo();
-		}
+		SelectQuery selQuery = new SelectQuery();
+		selQuery.execute();
+		
+		System.out.println(" ------------------------------------------------------------------------ ");
 		System.out.println();
-		System.out.println("----------------------------------------------");
+		System.out.println(" ------------------------------------------------------------------------ ");
+		System.out.println(" 전체계좌정보가 출력되었습니다.");
+		System.out.println(" ------------------------------------------------------------------------ ");
 		System.out.println();
-		System.out.println("----------------------------------------------");
-		System.out.println("전체계좌정보가 출력되었습니다.");
-		System.out.println("----------------------------------------------");
-		System.out.println();
-	} 
+	}
 	
 	
 	public static void main(String[] args) {
@@ -117,19 +126,19 @@ public class BankingSystemMain {
 			switch (choice) {
 			case 1:
 				System.out.println();
-				System.out.println("**************** 신규 계좌 개설 ****************");
+				System.out.println(" ****************************** 신규 계좌 개설 ****************************** ");
 				System.out.println();
 				makeAccount();
 				break;
 			case 2:
 				System.out.println();
-				System.out.println("**************** 입 금 ****************");
+				System.out.println(" ********************************* 입 금 ********************************* ");
 				System.out.println();
 				depositMoney();
 				break;
 			case 3:
 				System.out.println();
-				System.out.println("**************** 출 금 ****************");
+				System.out.println(" ********************************* 출 금 ********************************* ");
 				System.out.println();
 				withdrawMoney();
 				break;
@@ -140,7 +149,7 @@ public class BankingSystemMain {
 				break;
 			case 5:
 				System.out.println();
-				System.out.println("프로그램을 종료합니다.");
+				System.out.println(" 프로그램을 종료합니다.");
 				return;
 			}
 		}

@@ -1,4 +1,4 @@
-package banking7.jdbc.connect;
+package banking7.jdbc;
 
 
 import java.sql.Connection;
@@ -20,15 +20,9 @@ public class IConnectImpl implements IConnect {
 	public PreparedStatement psmt; //동적쿼리문실행
 	public ResultSet rs; //select 실행결과 반환
 
-	
-	//기본생성자
-	public IConnectImpl() {
-		System.out.println("IConnectImpl 기본생성자 호출");
-	}
-	
+
 	//인수생성자1: 아이디, 패스워드를 매개변수로 받음
 	public IConnectImpl(String user, String pass) {
-		System.out.println("IConnectImpl 인자생성자 호출");
 		
 		try {
 			//인터페이스에 선언된 멤버상수를 그대로 사용
@@ -41,20 +35,7 @@ public class IConnectImpl implements IConnect {
 			e.printStackTrace();
 		}
 	}
-	
-	//인수생성자2: 드라이버명까지 매개벼수로 받음
-	public IConnectImpl(String driver, String user, String pass) {
-		System.out.println("IConnectImpl 인자생성자 호출");
-		
-		try {
-			Class.forName(driver);
-			connect(user, pass);
-		}
-		catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패");
-			e.printStackTrace();
-		}
-	}
+
 	
 	//DB연결
 	@Override
@@ -86,11 +67,9 @@ public class IConnectImpl implements IConnect {
 			if(psmt != null) psmt.close();
 			if(rs != null) rs.close();
 			
-			
-			System.out.println("자원 반납 완료");
 		}
 		catch (Exception e) {
-			System.out.println("자원 반납시 오류발생");
+			System.out.println(" 자원 반납시 오류발생");
 			e.printStackTrace();
 		}
 	}
@@ -107,7 +86,7 @@ public class IConnectImpl implements IConnect {
 			비교한다. 즉, EXIT와 exit를 같은 문자열로 판단한다.
 		*/
 		if("EXIT".equalsIgnoreCase(inputStr)) {
-			System.out.println("프로그램을 종료합니다.");
+			System.out.println(" 프로그램을 종료합니다.");
 			//자원반납
 			close();
 			//프로그램 자체를 종료시킨다.

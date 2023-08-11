@@ -74,6 +74,7 @@ public abstract class Account implements Serializable {
 	
 //	abstract public String printInfo(); 
 	
+	@Override
 	public String toString() {
 		return String.format("계좌번호: %s, 이름: %s, 잔고: %d", accountNumber, name, balance);
 	}

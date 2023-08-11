@@ -1,6 +1,5 @@
-package banking7.jdbc.prepared;
+package banking7.jdbc;
 
-import banking7.jdbc.connect.IConnectImpl;
 
 public class DeleteSQL extends IConnectImpl {
 
@@ -28,9 +27,6 @@ public class DeleteSQL extends IConnectImpl {
 			close();
 		}
 	}
-	
-	public static void main(String[] args) {
-		new DeleteSQL().execute();		
-	}
+
 }
 
