@@ -38,7 +38,7 @@ public class AccountManager {
 		System.out.print("기본이자%(정수형태로입력): "); int inter = scan.nextInt();
 		scan.nextLine();
 		
-		Account acc = null;
+		Account acc = null; //=> 참조변수만 선언
 		switch (choice) {
 		case 1:
 			acc = new NormalAccount(accountNumber, name, balance, inter);
