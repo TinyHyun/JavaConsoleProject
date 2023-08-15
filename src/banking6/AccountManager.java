@@ -338,7 +338,7 @@ public class AccountManager {
 			System.out.printf("%d개의 정보를 불러왔습니다.\n", accSet.size());
 		}
 		catch (ClassCastException e) {
-			System.out.println("한서가 알빠아니래요.");
+			System.out.println("참조가 잘못되었습니다.");
 		}
 		catch (ClassNotFoundException e) {
 			System.out.println("객체를 찾을 수 없습니다.");

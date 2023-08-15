@@ -72,7 +72,6 @@ public abstract class Account implements Serializable {
 		return true;
 	}
 	
-//	abstract public String printInfo(); 
 	
 	@Override
 	public String toString() {
